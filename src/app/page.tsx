@@ -1,7 +1,9 @@
 import Image from "next/image";
 
 import { cn } from "@/lib/utils";
-import { ArrowUpRight, Github, Linkedin, Mail } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
+
+import { GitHubIcon, LinkedInIcon, MailIcon } from "@/components/brand-icons";
 
 // Add a public email here to show it in the Connect line. Leave empty to hide.
 const email = "";
@@ -43,13 +45,13 @@ const connect = [
   {
     name: "GitHub",
     href: "https://github.com/aflekkas",
-    icon: Github,
+    icon: GitHubIcon,
     tile: "bg-[#181717]",
   },
   {
     name: "LinkedIn",
     href: "https://www.linkedin.com/in/alexandros-lekkas/",
-    icon: Linkedin,
+    icon: LinkedInIcon,
     tile: "bg-[#0A66C2]",
   },
 ];
@@ -198,7 +200,7 @@ export default function Page() {
           {email && (
             <a href={`mailto:${email}`} className="group inline-flex items-center gap-2">
               <span className="flex size-7 items-center justify-center rounded-lg bg-neutral-500 text-white shadow-sm transition-transform duration-200 group-hover:-translate-y-0.5">
-                <Mail className="size-4" />
+                <MailIcon className="size-4" />
               </span>
 
               <span className="text-muted-foreground transition-colors group-hover:text-foreground">

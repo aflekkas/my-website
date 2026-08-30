@@ -89,6 +89,8 @@
 [data-animate] {
   animation: fade-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
   animation-delay: calc(var(--stagger, 0) * 70ms);
+  user-select: text;
+  -webkit-user-select: text;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -106,13 +108,14 @@
   background: rgba(255, 255, 255, 0.26);
 }
 
-/* Links are drag sources by default, which swallows text selection inside them. */
-a {
-  -webkit-user-drag: none;
-}
-
-a p,
-a span {
+/* Links are drag sources by default, which swallows text selection when
+   you drag across them. Disable the drag ghost and force text selection. */
+a,
+a * {
   user-select: text;
   -webkit-user-select: text;
+}
+
+a {
+  -webkit-user-drag: none;
 }
