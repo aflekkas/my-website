@@ -1,15 +1,11 @@
 import { Metadata } from "next";
-import { Figtree } from "next/font/google";
+import { Inter } from "next/font/google";
 
 import { ThemeProvider } from "@/lib/providers/theme-provider";
-import { ClientPointer } from "@/components/client-pointer";
 
 import "./globals.css";
 
-const figtree = Figtree({
-  subsets: ["latin"],
-  variable: "--font-figtree",
-});
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://alexandroslekkas.com"),
@@ -53,16 +49,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={figtree.className} suppressHydrationWarning>
-      <body>
-        <main className="bg-background">
-          <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
-            {children}
-          </ThemeProvider>
-
-        
-          <ClientPointer />
-        </main>
+    <html lang="en" className={inter.className} suppressHydrationWarning>
+      <body className="antialiased">
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <main className="min-h-screen bg-background">{children}</main>
+        </ThemeProvider>
       </body>
     </html>
   );

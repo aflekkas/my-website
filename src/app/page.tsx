@@ -1,66 +1,195 @@
-"use client";
+import Image from "next/image";
+import { ArrowUpRight, Github, Linkedin } from "lucide-react";
 
-import { useState } from "react";
+// Add a public email here to show it in the Connect line. Leave empty to hide.
+const email = "";
 
-import { cn } from "@/lib/utils";
-
-import { ScrollArea } from "@/components/ui/scroll-area";
-
-import { About } from "./about";
-import { Projects } from "./projects";
-import { Settings } from "./settings";
-
-const tabs = [
-  { name: "About", component: <About /> },
-  { name: "Projects", component: <Projects /> },
-  { name: "Settings", component: <Settings /> },
+const building = [
+  {
+    name: "Spawn Partners",
+    href: "https://spawnpartners.com",
+    description: "Technology partner for provider businesses.",
+    preview: "/images/previews/spawn-partners.jpg",
+  },
 ];
 
-export default function Page() {
-  const [background, setBackground] = useState<string>(
-    "slate-800 dark:bg-neutral-900"
-  );
-  const [activeTab, setActiveTab] = useState<{
-    name: string;
-    component: React.ReactNode;
-  }>(tabs[0]);
+const exited = [
+  {
+    name: "MediaMaxxing",
+    href: "https://www.mediamaxxing.com",
+    description: "Creator-first platform connecting brands with creators.",
+    preview: "/images/previews/mediamaxxing.jpg",
+  },
+];
 
+const sites = [
+  {
+    name: "White Dovecote",
+    href: "https://whitedovecote.com",
+    description: "Private villa in Agapi, Tinos.",
+    preview: "/images/previews/white-dovecote.jpg",
+  },
+  {
+    name: "Apoesthisis",
+    href: "https://apoesthisis.com",
+    description: "Creative practice working in ceramics and mixed media.",
+    preview: "/images/previews/apoesthisis.jpg",
+  },
+];
+
+const connect = [
+  { name: "GitHub", href: "https://github.com/aflekkas", icon: Github },
+  {
+    name: "LinkedIn",
+    href: "https://www.linkedin.com/in/alexandros-lekkas/",
+    icon: Linkedin,
+  },
+];
+
+function stagger(index: number) {
+  return { "--stagger": index } as React.CSSProperties;
+}
+
+function TextLink({
+  href,
+  children,
+}: {
+  href: string;
+  children: React.ReactNode;
+}) {
   return (
-    <div
-      className={cn(
-        "fixed inset-0 h-screen w-screen overflow-hidden touch-none overflow-y-hidden scrollbar-none",
-        `bg-${background}`
-      )}
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="underline-offset-4 hover:underline"
     >
-      <div className="flex h-full w-full items-center justify-center p-4">
-        <div className="animate-in fade-in zoom-in-95 rounded-2xl bg-background backdrop-blur-lg shadow-2xl w-full sm:max-w-2xl lg:max-w-[55vw] h-full max-h-[75vh] sm:max-h-96 lg:max-h-[65vh] overflow-hidden ring-4 dark:ring-neutral-700 ring-slate-700 dark:hover:ring-neutral-600 hover:ring-slate-500 transition-all duration-1000">
-          <div className="bg-muted pt-3 px-3 gap-2 flex flex-row">
-            <div className="size-4 rounded-full bg-red-400" />
-            <div className="size-4 rounded-full bg-yellow-400" />
-            <div className="size-4 rounded-full bg-green-400" />
-          </div>
+      {children}
+    </a>
+  );
+}
 
-          <div className="bg-muted p-3 flex flex-row gap-3">
-            {tabs.map((tab) => (
-              <div
-                key={tab.name}
-                className={cn(
-                  "bg-background px-3 py-1 rounded-lg font-medium transition-all duration-300",
-                  activeTab.name === tab.name &&
-                  "bg-slate-800 dark:bg-primary text-primary-foreground"
-                )}
-                onClick={() => setActiveTab(tab)}
-              >
-                {tab.name}
-              </div>
-            ))}
-          </div>
+function SectionHeading({ children }: { children: React.ReactNode }) {
+  return <h2 className="text-sm font-normal text-muted-foreground">{children}</h2>;
+}
 
-          <ScrollArea className="bg-background h-full">
-            <div className="p-5 pb-28 flex flex-col gap-3 mr-2">
-              {activeTab.component}
-            </div>
-          </ScrollArea>
+function Card({
+  name,
+  href,
+  description,
+  preview,
+}: {
+  name: string;
+  href: string;
+  description: string;
+  preview: string;
+}) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group block overflow-hidden rounded-xl border bg-card transition-colors hover:bg-muted/40"
+    >
+      <div className="border-b bg-muted">
+        <Image
+          src={preview}
+          alt={`${name} homepage`}
+          width={1280}
+          height={800}
+          sizes="(min-width: 640px) 320px, 100vw"
+          className="aspect-[16/10] w-full object-cover object-top transition-opacity duration-300 group-hover:opacity-90"
+        />
+      </div>
+
+      <div className="p-3">
+        <span className="inline-flex items-center gap-0.5 underline-offset-4 group-hover:underline">
+          {name}
+          <ArrowUpRight className="size-3.5 text-muted-foreground transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+        </span>
+
+        <p className="mt-0.5 text-sm text-muted-foreground">{description}</p>
+      </div>
+    </a>
+  );
+}
+
+export default function Page() {
+  return (
+    <div className="mx-auto max-w-2xl px-6 py-24 sm:py-32">
+      <h1 data-animate style={stagger(0)} className="font-medium">
+        Alexandros Lekkas
+      </h1>
+
+      <p data-animate style={stagger(1)} className="mt-4 text-muted-foreground">
+        Computer Science at the University of Chicago. I build{" "}
+        <TextLink href="https://spawnpartners.com">Spawn Partners</TextLink>,
+        software that audits how AI assistants describe healthcare practices,
+        mostly for multi-location dental groups across the US.
+      </p>
+
+      <p data-animate style={stagger(2)} className="mt-3 text-muted-foreground">
+        Before that I was a founding member of MediaMaxxing, a creator marketing
+        platform I&apos;m now exiting. I came up through content and growth
+        before moving to engineering, and I still design and build websites for
+        clients.
+      </p>
+
+      <div
+        data-animate
+        style={stagger(3)}
+        className="mt-16 grid gap-x-6 gap-y-8 sm:grid-cols-2"
+      >
+        <div className="flex flex-col gap-3">
+          <SectionHeading>Building</SectionHeading>
+          {building.map((item) => (
+            <Card key={item.name} {...item} />
+          ))}
+        </div>
+
+        <div className="flex flex-col gap-3">
+          <SectionHeading>Previously</SectionHeading>
+          {exited.map((item) => (
+            <Card key={item.name} {...item} />
+          ))}
+        </div>
+      </div>
+
+      <div data-animate style={stagger(4)} className="mt-12 flex flex-col gap-3">
+        <SectionHeading>Sites</SectionHeading>
+
+        <div className="grid gap-6 sm:grid-cols-2">
+          {sites.map((item) => (
+            <Card key={item.name} {...item} />
+          ))}
+        </div>
+      </div>
+
+      <div data-animate style={stagger(5)} className="mt-16">
+        <h2 className="font-medium">Connect</h2>
+
+        <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2">
+          {connect.map(({ name, href, icon: Icon }) => (
+            <a
+              key={name}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-muted-foreground transition-colors hover:text-foreground"
+            >
+              <Icon className="size-4" />
+              {name}
+            </a>
+          ))}
+
+          {email && (
+            <a
+              href={`mailto:${email}`}
+              className="text-muted-foreground transition-colors hover:text-foreground"
+            >
+              {email}
+            </a>
+          )}
         </div>
       </div>
     </div>
