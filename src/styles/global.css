@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+/* The palette only defines the tokens the page actually uses. Dark mode
+   follows the system preference; there is no toggle. */
+:root {
+  --background: hsl(0 0% 100%);
+  --foreground: hsl(210 11.1% 3.53%);
+  --card: hsl(0 0% 100%);
+  --muted: hsl(0 0% 96.1%);
+  --muted-foreground: hsl(0 0% 45.1%);
+  --border: hsl(0 0% 89.8%);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: hsl(0 0% 8%);
+    --foreground: hsl(0 0% 98%);
+    --card: hsl(210 11.1% 3.53%);
+    --muted: hsl(0 0% 14.9%);
+    --muted-foreground: hsl(0 0% 63.9%);
+    --border: hsl(0 0% 14.9%);
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  *,
+  ::before,
+  ::after {
+    border-color: var(--color-border);
+  }
+
+  body {
+    @apply bg-background font-sans text-foreground antialiased;
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+[data-animate] {
+  animation: fade-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(var(--stagger, 0) * 70ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-animate] {
+    animation: none;
+  }
+}
+
+::selection {
+  background: rgba(0, 0, 0, 0.18);
+  text-shadow: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  ::selection {
+    background: rgba(255, 255, 255, 0.26);
+  }
+}
+
+/* Links are drag sources by default, which swallows text selection when
+   you drag across them. Disable the drag ghost and force text selection. */
+a,
+a * {
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+a {
+  -webkit-user-drag: none;
+}

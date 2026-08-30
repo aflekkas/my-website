@@ -3,7 +3,7 @@ import { readdirSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
 
 const FORBIDDEN = /[—–]/;
-const EXTENSIONS = /\.(tsx?|jsx?|css|md|mdx)$/;
+const EXTENSIONS = /\.(astro|tsx?|jsx?|css|md|mdx)$/;
 const hits = [];
 
 function walk(dir) {
