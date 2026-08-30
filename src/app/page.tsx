@@ -184,14 +184,14 @@ export default function Page() {
             >
               <span
                 className={cn(
-                  "flex size-7 items-center justify-center rounded-lg text-white shadow-sm transition-transform duration-200 group-hover:-translate-y-0.5",
+                  "flex size-6 items-center justify-center rounded-md text-white shadow-sm transition-transform duration-200 group-hover:-translate-y-0.5",
                   tile
                 )}
               >
-                <Icon className="size-4" />
+                <Icon className="size-3.5" />
               </span>
 
-              <span className="text-muted-foreground transition-colors group-hover:text-foreground">
+              <span className="text-sm text-muted-foreground underline-offset-4 transition-colors group-hover:text-foreground group-hover:underline">
                 {name}
               </span>
             </a>
@@ -199,11 +199,11 @@ export default function Page() {
 
           {email && (
             <a href={`mailto:${email}`} className="group inline-flex items-center gap-2">
-              <span className="flex size-7 items-center justify-center rounded-lg bg-neutral-500 text-white shadow-sm transition-transform duration-200 group-hover:-translate-y-0.5">
-                <MailIcon className="size-4" />
+              <span className="flex size-6 items-center justify-center rounded-md bg-neutral-500 text-white shadow-sm transition-transform duration-200 group-hover:-translate-y-0.5">
+                <MailIcon className="size-3.5" />
               </span>
 
-              <span className="text-muted-foreground transition-colors group-hover:text-foreground">
+              <span className="text-sm text-muted-foreground underline-offset-4 transition-colors group-hover:text-foreground group-hover:underline">
                 Email
               </span>
             </a>

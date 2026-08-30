@@ -14,7 +14,9 @@ export function GitHubIcon({ className }: IconProps) {
 export function LinkedInIcon({ className }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden className={className}>
-      <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5S0 4.881 0 3.5 1.11 1 2.5 1s2.48 1.119 2.48 2.5zM.02 8h4.96v14H.02V8zm7.44 0h4.75v1.914h.068c.662-1.2 2.278-2.464 4.69-2.464 5.015 0 5.94 3.203 5.94 7.37V22h-4.96v-6.36c0-1.517-.03-3.47-2.114-3.47-2.117 0-2.44 1.653-2.44 3.36V22H7.46V8z" />
+      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+      <rect width="4" height="12" x="2" y="9" rx="0.5" />
+      <circle cx="4" cy="4" r="2" />
     </svg>
   );
 }
