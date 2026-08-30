@@ -1,5 +1,7 @@
 import Image from "next/image";
-import { ArrowUpRight, Github, Linkedin } from "lucide-react";
+
+import { cn } from "@/lib/utils";
+import { ArrowUpRight, Github, Linkedin, Mail } from "lucide-react";
 
 // Add a public email here to show it in the Connect line. Leave empty to hide.
 const email = "";
@@ -38,11 +40,17 @@ const sites = [
 ];
 
 const connect = [
-  { name: "GitHub", href: "https://github.com/aflekkas", icon: Github },
+  {
+    name: "GitHub",
+    href: "https://github.com/aflekkas",
+    icon: Github,
+    tile: "bg-[#181717]",
+  },
   {
     name: "LinkedIn",
     href: "https://www.linkedin.com/in/alexandros-lekkas/",
     icon: Linkedin,
+    tile: "bg-[#0A66C2]",
   },
 ];
 
@@ -89,6 +97,7 @@ function Card({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
+      draggable={false}
       className="group block overflow-hidden rounded-xl border bg-card transition-colors hover:bg-muted/40"
     >
       <div className="border-b bg-muted">
@@ -125,14 +134,8 @@ export default function Page() {
         Computer Science at the University of Chicago. I build{" "}
         <TextLink href="https://spawnpartners.com">Spawn Partners</TextLink>,
         software that audits how AI assistants describe healthcare practices,
-        mostly for multi-location dental groups across the US.
-      </p>
-
-      <p data-animate style={stagger(2)} className="mt-3 text-muted-foreground">
-        Before that I was a founding member of MediaMaxxing, a creator marketing
-        platform I&apos;m now exiting. I came up through content and growth
-        before moving to engineering, and I still design and build websites for
-        clients.
+        mostly for multi-location dental groups across the US. I also build
+        websites for clients.
       </p>
 
       <div
@@ -148,7 +151,7 @@ export default function Page() {
         </div>
 
         <div className="flex flex-col gap-3">
-          <SectionHeading>Previously</SectionHeading>
+          <SectionHeading>Exited</SectionHeading>
           {exited.map((item) => (
             <Card key={item.name} {...item} />
           ))}
@@ -168,26 +171,39 @@ export default function Page() {
       <div data-animate style={stagger(5)} className="mt-16">
         <h2 className="font-medium">Connect</h2>
 
-        <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2">
-          {connect.map(({ name, href, icon: Icon }) => (
+        <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-3">
+          {connect.map(({ name, href, icon: Icon, tile }) => (
             <a
               key={name}
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-muted-foreground transition-colors hover:text-foreground"
+              className="group inline-flex items-center gap-2"
             >
-              <Icon className="size-4" />
-              {name}
+              <span
+                className={cn(
+                  "flex size-7 items-center justify-center rounded-lg text-white shadow-sm transition-transform duration-200 group-hover:-translate-y-0.5",
+                  tile
+                )}
+              >
+                <Icon className="size-4" />
+              </span>
+
+              <span className="text-muted-foreground transition-colors group-hover:text-foreground">
+                {name}
+              </span>
             </a>
           ))}
 
           {email && (
-            <a
-              href={`mailto:${email}`}
-              className="text-muted-foreground transition-colors hover:text-foreground"
-            >
-              {email}
+            <a href={`mailto:${email}`} className="group inline-flex items-center gap-2">
+              <span className="flex size-7 items-center justify-center rounded-lg bg-neutral-500 text-white shadow-sm transition-transform duration-200 group-hover:-translate-y-0.5">
+                <Mail className="size-4" />
+              </span>
+
+              <span className="text-muted-foreground transition-colors group-hover:text-foreground">
+                Email
+              </span>
             </a>
           )}
         </div>

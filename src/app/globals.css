@@ -105,3 +105,14 @@
 .dark ::selection {
   background: rgba(255, 255, 255, 0.26);
 }
+
+/* Links are drag sources by default, which swallows text selection inside them. */
+a {
+  -webkit-user-drag: none;
+}
+
+a p,
+a span {
+  user-select: text;
+  -webkit-user-select: text;
+}
