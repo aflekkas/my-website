@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['i.gyazo.com'],
+    remotePatterns: [{ protocol: "https", hostname: "i.gyazo.com" }],
   },
   env: {
     PROXYCURL_API_KEY: process.env.PROXYCURL_API_KEY,
