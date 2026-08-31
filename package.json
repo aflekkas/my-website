@@ -7,6 +7,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "deploy": "astro build && wrangler deploy",
+    "cf:dev": "astro build && wrangler dev",
     "check:dashes": "node scripts/check-dashes.mjs"
   },
   "dependencies": {
@@ -15,5 +17,8 @@
     "astro": "^7.2.9",
     "sharp": "^0.35.4",
     "tailwindcss": "^4.1.0"
+  },
+  "devDependencies": {
+    "wrangler": "^4.127.1"
   }
 }
