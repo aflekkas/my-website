@@ -7,9 +7,10 @@ interface Props {
   href: string;
   description: string;
   preview: ImageMetadata;
+  status?: string;
 }
 
-const { name, href, description, preview } = Astro.props;
+const { name, href, description, preview, status } = Astro.props;
 ---
 
 <a
@@ -19,32 +20,42 @@ const { name, href, description, preview } = Astro.props;
   draggable="false"
   class="group block overflow-hidden rounded-xl border bg-card transition-colors hover:bg-muted/40"
 >
-  <div class="border-b bg-muted">
+  <div class="aspect-[16/10] overflow-hidden border-b bg-muted">
     <Image
       src={preview}
-      alt={`${name} homepage`}
+      alt={`${name} preview`}
       widths={[400, 640, 960]}
       sizes="(min-width: 640px) 320px, 100vw"
-      class="aspect-[16/10] w-full object-cover object-top transition-opacity duration-300 group-hover:opacity-90"
+      class="h-full w-full object-cover object-top"
     />
   </div>
 
   <div class="p-3">
-    <span class="inline-flex items-center gap-0.5 underline-offset-4 group-hover:underline">
-      {name}
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        aria-hidden="true"
-        class="size-3.5 text-muted-foreground transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-      >
-        <path d="M7 7h10v10M7 17 17 7"></path>
-      </svg>
-    </span>
+    <div class="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
+      <span class="inline-flex items-center gap-0.5 underline-offset-4 group-hover:underline">
+        {name}
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+          class="size-3.5 text-muted-foreground transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+        >
+          <path d="M7 7h10v10M7 17 17 7"></path>
+        </svg>
+      </span>
+
+      {
+        status && (
+          <span class="shrink-0 text-xs text-muted-foreground">
+            {status}
+          </span>
+        )
+      }
+    </div>
 
     <p class="mt-0.5 text-sm text-muted-foreground">{description}</p>
   </div>
